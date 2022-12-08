@@ -1,0 +1,50 @@
+1:C 09 Dec 2022 03:24:24.238 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 09 Dec 2022 03:24:24.240 # Redis version=7.0.3, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 09 Dec 2022 03:24:24.242 # Configuration loaded
+1:S 09 Dec 2022 03:24:24.245 * monotonic clock: POSIX clock_gettime
+1:S 09 Dec 2022 03:24:24.249 * Running mode=standalone, port=6379.
+1:S 09 Dec 2022 03:24:24.254 # Server initialized
+1:S 09 Dec 2022 03:24:24.269 * Creating AOF base file appendonly.aof.1.base.rdb on server start
+1:S 09 Dec 2022 03:24:24.278 * Creating AOF incr file appendonly.aof.1.incr.aof on server start
+1:S 09 Dec 2022 03:24:24.280 * Ready to accept connections
+1:S 09 Dec 2022 03:24:24.286 * Connecting to MASTER 172.50.5.0:6379
+1:S 09 Dec 2022 03:24:24.297 * MASTER <-> REPLICA sync started
+1:S 09 Dec 2022 03:24:25.347 * Non blocking connect for SYNC fired the event.
+1:S 09 Dec 2022 03:24:25.348 * Master replied to PING, replication can continue...
+1:S 09 Dec 2022 03:24:25.384 * Partial resynchronization not possible (no cached master)
+1:S 09 Dec 2022 03:24:30.772 * Full resync from master: c5f13741d91c299dfc5f75ce1b9dc92456a241c5:0
+1:S 09 Dec 2022 03:24:30.779 * MASTER <-> REPLICA sync: receiving streamed RDB from master with EOF to disk
+1:S 09 Dec 2022 03:24:30.785 * MASTER <-> REPLICA sync: Flushing old data
+1:S 09 Dec 2022 03:24:30.788 * MASTER <-> REPLICA sync: Loading DB in memory
+1:S 09 Dec 2022 03:24:30.796 * Loading RDB produced by version 7.0.3
+1:S 09 Dec 2022 03:24:30.799 * RDB age 0 seconds
+1:S 09 Dec 2022 03:24:30.803 * RDB memory usage when created 0.90 Mb
+1:S 09 Dec 2022 03:24:30.808 * Done loading RDB, keys loaded: 0, keys expired: 0.
+1:S 09 Dec 2022 03:24:30.811 * MASTER <-> REPLICA sync: Finished with success
+1:S 09 Dec 2022 03:24:30.818 * Creating AOF incr file temp-appendonly.aof.incr on background rewrite
+1:S 09 Dec 2022 03:24:30.830 * Background append only file rewriting started by pid 16
+16:C 09 Dec 2022 03:24:30.841 * Successfully created the temporary AOF base file temp-rewriteaof-bg-16.aof
+16:C 09 Dec 2022 03:24:30.845 * Fork CoW for AOF rewrite: current 0 MB, peak 0 MB, average 0 MB
+1:S 09 Dec 2022 03:24:30.933 * Background AOF rewrite terminated with success
+1:S 09 Dec 2022 03:24:30.939 * Successfully renamed the temporary AOF base file temp-rewriteaof-bg-16.aof into appendonly.aof.2.base.rdb
+1:S 09 Dec 2022 03:24:30.943 * Successfully renamed the temporary AOF incr file temp-appendonly.aof.incr into appendonly.aof.2.incr.aof
+1:S 09 Dec 2022 03:24:30.967 * Removing the history file appendonly.aof.1.incr.aof in the background
+1:S 09 Dec 2022 03:24:30.973 * Removing the history file appendonly.aof.1.base.rdb in the background
+1:S 09 Dec 2022 03:24:30.989 * Background AOF rewrite finished successfully
+1:S 09 Dec 2022 03:52:55.407 # Connection with master lost.
+1:S 09 Dec 2022 03:52:55.456 * Caching the disconnected master state.
+1:S 09 Dec 2022 03:52:55.460 * Reconnecting to MASTER 172.50.5.0:6379
+1:S 09 Dec 2022 03:52:55.462 * MASTER <-> REPLICA sync started
+1:S 09 Dec 2022 03:52:55.464 # Error condition on socket for SYNC: Connection refused
+1:S 09 Dec 2022 03:52:55.586 * Connecting to MASTER 172.50.5.0:6379
+1:S 09 Dec 2022 03:52:55.588 * MASTER <-> REPLICA sync started
+1:S 09 Dec 2022 03:53:01.596 * Connecting to MASTER 172.50.5.2:6379
+1:S 09 Dec 2022 03:53:01.598 * MASTER <-> REPLICA sync started
+1:S 09 Dec 2022 03:53:01.600 * REPLICAOF 172.50.5.2:6379 enabled (user request from 'id=6 addr=172.50.5.3:47626 laddr=172.50.5.1:6379 fd=12 name=sentinel-b8b2f680-cmd age=303 idle=0 flags=x db=0 sub=0 psub=0 ssub=0 multi=4 qbuf=348 qbuf-free=20126 argv-mem=4 multi-mem=178 rbs=8192 rbp=4096 obl=45 oll=0 omem=0 tot-mem=29742 events=r cmd=exec user=default redir=-1 resp=2')
+1:S 09 Dec 2022 03:53:01.612 # CONFIG REWRITE executed with success.
+1:S 09 Dec 2022 03:53:01.616 * Non blocking connect for SYNC fired the event.
+1:S 09 Dec 2022 03:53:01.619 * Master replied to PING, replication can continue...
+1:S 09 Dec 2022 03:53:01.622 * Trying a partial resynchronization (request c5f13741d91c299dfc5f75ce1b9dc92456a241c5:67612).
+1:S 09 Dec 2022 03:53:01.625 * Successful partial resynchronization with master.
+1:S 09 Dec 2022 03:53:01.627 # Master replication ID changed to 832c7c28e3f4b15c43e5ad909286facd71a90871
+1:S 09 Dec 2022 03:53:01.628 * MASTER <-> REPLICA sync: Master accepted a Partial Resynchronization.

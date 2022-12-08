@@ -1,0 +1,28 @@
+1:X 09 Dec 2022 03:47:57.894 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:X 09 Dec 2022 03:47:57.899 # Redis version=7.0.3, bits=64, commit=00000000, modified=0, pid=1, just started
+1:X 09 Dec 2022 03:47:57.905 # Configuration loaded
+1:X 09 Dec 2022 03:47:57.909 * monotonic clock: POSIX clock_gettime
+1:X 09 Dec 2022 03:47:57.912 * Running mode=sentinel, port=6000.
+1:X 09 Dec 2022 03:47:57.942 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:47:57.946 # Sentinel ID is c16bfa2654ed834b05c234423cc3ccedeeefbdd6
+1:X 09 Dec 2022 03:47:57.948 # +monitor master rds_master_slaves-11111 172.50.5.0 6379 quorum 2
+1:X 09 Dec 2022 03:47:57.952 * +slave slave 172.50.5.2:6379 172.50.5.2 6379 @ rds_master_slaves-11111 172.50.5.0 6379
+1:X 09 Dec 2022 03:47:57.998 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:47:57.999 * +slave slave 172.50.5.1:6379 172.50.5.1 6379 @ rds_master_slaves-11111 172.50.5.0 6379
+1:X 09 Dec 2022 03:47:58.019 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:48:00.233 * +sentinel sentinel b8b2f680a5163389b55b4d539e71c009f32093f3 172.50.5.3 6000 @ rds_master_slaves-11111 172.50.5.0 6379
+1:X 09 Dec 2022 03:48:00.244 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:48:00.247 * +sentinel sentinel fc782f3a13d93f488b99a2efc145192d17bb68d3 172.50.5.5 6000 @ rds_master_slaves-11111 172.50.5.0 6379
+1:X 09 Dec 2022 03:48:00.259 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:53:00.457 # +sdown master rds_master_slaves-11111 172.50.5.0 6379
+1:X 09 Dec 2022 03:53:00.593 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:53:00.595 # +new-epoch 1
+1:X 09 Dec 2022 03:53:00.603 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:53:00.604 # +vote-for-leader b8b2f680a5163389b55b4d539e71c009f32093f3 1
+1:X 09 Dec 2022 03:53:01.595 # +config-update-from sentinel b8b2f680a5163389b55b4d539e71c009f32093f3 172.50.5.3 6000 @ rds_master_slaves-11111 172.50.5.0 6379
+1:X 09 Dec 2022 03:53:01.598 # +switch-master rds_master_slaves-11111 172.50.5.0 6379 172.50.5.2 6379
+1:X 09 Dec 2022 03:53:01.600 * +slave slave 172.50.5.1:6379 172.50.5.1 6379 @ rds_master_slaves-11111 172.50.5.2 6379
+1:X 09 Dec 2022 03:53:01.602 * +slave slave 172.50.5.0:6379 172.50.5.0 6379 @ rds_master_slaves-11111 172.50.5.2 6379
+1:X 09 Dec 2022 03:53:01.616 * Sentinel new configuration saved on disk
+1:X 09 Dec 2022 03:53:06.641 # +sdown slave 172.50.5.0:6379 172.50.5.0 6379 @ rds_master_slaves-11111 172.50.5.2 6379
+1:X 09 Dec 2022 03:53:16.851 # -sdown slave 172.50.5.0:6379 172.50.5.0 6379 @ rds_master_slaves-11111 172.50.5.2 6379

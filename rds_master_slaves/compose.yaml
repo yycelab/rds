@@ -1,0 +1,41 @@
+version: '3'
+services:
+ master:
+    container_name: rds_master_slaves-master
+    command: redis-server /usr/local/etc/redis/redis.conf
+    image: myredis:7.0.3-alphine
+    networks:
+      nt_rds_master_slaves:
+        ipv4_address: 172.50.5.0
+    ports:
+      - 11111:6379
+    volumes:
+      - ./master/conf:/usr/local/etc/redis/
+      - ./master/data:/data:rw
+ salve_1:
+    container_name: rds_master_slaves-slave1
+    command: redis-server /usr/local/etc/redis/redis.conf
+    image: myredis:7.0.3-alphine
+    networks:
+      nt_rds_master_slaves:
+        ipv4_address: 172.50.5.1
+    ports:
+      - 11112:6379
+    volumes:
+      - ./salve1/conf:/usr/local/etc/redis/
+      - ./salve1/data:/data:rw
+ salve_2:
+    container_name: rds_master_slaves-slave2
+    command: redis-server /usr/local/etc/redis/redis.conf
+    image: myredis:7.0.3-alphine
+    networks:
+      nt_rds_master_slaves:
+        ipv4_address: 172.50.5.2
+    ports:
+      - 11113:6379
+    volumes:
+      - ./salve2/conf:/usr/local/etc/redis/
+      - ./salve2/data:/data:rw
+networks:
+  nt_rds_master_slaves:
+    external: true

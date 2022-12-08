@@ -1,0 +1,37 @@
+version: '3'
+services:
+ salve_0:
+    container_name: rds_sentinels-slave0
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    image: myredis:7.0.3-alphine
+    volumes:
+      - ./sentinel0/conf:/usr/local/etc/redis/
+      - ./sentinel0/data:/data:rw
+    networks:
+      nt_rds_sentinels:
+      nt_rds_master_slaves:
+ salve_1:
+    container_name: rds_sentinels-slave1
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    image: myredis:7.0.3-alphine
+    volumes:
+      - ./sentinel1/conf:/usr/local/etc/redis/
+      - ./sentinel1/data:/data:rw
+    networks:
+      nt_rds_sentinels:
+      nt_rds_master_slaves:
+ salve_2:
+    container_name: rds_sentinels-slave2
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    image: myredis:7.0.3-alphine
+    volumes:
+      - ./sentinel2/conf:/usr/local/etc/redis/
+      - ./sentinel2/data:/data:rw
+    networks:
+      nt_rds_sentinels:
+      nt_rds_master_slaves:
+networks:
+  nt_rds_sentinels:
+    external: true
+  nt_rds_master_slaves:
+    external: true
