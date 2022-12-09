@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# [-f] {replica_num} {master_num}
 wdir="rds_cluster"
 cdir=$(pwd)
 if [[ "$cdir" = */scripts ]]; then
@@ -98,10 +99,14 @@ EOF
 
 echo "$echotitle write $yaml success"
 echo "$echotitle $($script $network $subnet $gateway $iprange)"
+if [ ! -d $wdir/$node/data ]; then
+    mkdir $wdir/$node/data
+fi
+cat >>$wdir/$node/data/cluster-create.sh <<EOF
+redis-cli --cluster create $nodes --cluster-replicas $replica
+EOF
+
 docker-compose -f $yaml up -d
-init_cluster="redis-cli --cluster create $nodes --cluster-replicas $replica"
-
 # todo 自动化
-# docker exec -it $wdir-server1 $init_cluster&
-
-echo "$init_cluster"
+echo "$echotitle docker exec -it $wdir-server$order /bin/sh /data/cluster-create.sh"
+docker exec -it $wdir-server$order /bin/sh /data/cluster-create.sh

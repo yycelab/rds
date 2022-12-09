@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 # [h|std(standalone)|c(cluster)|m(sentinel)|r(replica)|lock]
 if [ -z "$1" ] || [ "$1" == "h" ]; then
+    echo ""
     echo "usage: [command [subcommand] [option]]"
     echo "available command:"
-    echo "    h help info."
-    echo "  std create a standalone redis server"
-    echo "    c create a redis's cluster (3masters,2replicas) with 9 server nodes"
-    echo "    m create a sentinel cluster (3 sentinels)"
-    echo "    r create a replication(1master,2slaves)"
-    echo " lock create 3 redis server(standalone) for redlock"
+    echo "     h help info."
+    echo "   std create a standalone redis server"
+    echo "     c create a redis's cluster (3masters,2replicas) with 9 server nodes"
+    echo "     m create a sentinel cluster (3 sentinels)"
+    echo "     r create a replication(1master,2slaves)"
+    echo "  lock create 3 redis server(standalone) for redlock"
     echo "subcommand:"
-    echo "stop stop services and destroy the compose.yaml file spec resources."
+    echo "  stop stop services and destroy the compose.yaml file spec resources."
     echo "command(std|c|m|r|lock) option:"
-    echo "   -f remove all auto dir's directory,remove the internal spec network"
+    echo "    -f remove all auto dir's directory,remove the internal spec network"
 else
     force=0
     args=""
@@ -34,6 +35,9 @@ else
     if [ "$1" == "std" ]; then
         exec="./scripts/standalone.sh"
     elif [ "$1" == "c" ]; then
+        if [ "$2" != "stop" ]; then
+            args="$args 2"
+        fi
         exec="./scripts/ha-cluster.sh"
     elif [ "$1" == "m" ]; then
         if [ "$2" != "stop" ]; then

@@ -23,6 +23,12 @@ if [ "$1" == "rm" ]; then
   fi
 fi
 
+find=$(docker network ls | grep $1)
+if [ -n "$find" ]; then
+  echo "$echotitle $1 is exist,skipped!"
+  exit 0
+fi
+
 params="--driver=$5"
 if [ -z "$5" ]; then
   params="--driver=bridge"
