@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # 参数说明
 # 建立网关:{network_name} {subnet}  {gateway} {ip_range} {driver}
 # eg: mynetwork 172.20.0.0/16 172.20.5.254 172.20.5.0/24
@@ -13,6 +13,7 @@ if [ "$1" == "rm" ]; then
     echo "$echotitle must spec the network name for removing"
     exit 1
   fi
+  echo "$echotitle docker network rm $2"
   res=$(docker network rm "$2")
   if [ "$2" = "$res" ]; then
     echo "$echotitle network removed $2 success"

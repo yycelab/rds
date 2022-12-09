@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # stop [-f]
 # [-f] {network} {ip_prefix} {begin} {slave_num}
 
@@ -13,13 +13,13 @@ if [ "$1" == "stop" ]; then
     fi
 elif [ "$1" == "-f" ]; then
     force=1
-    inputs=($2 $3 $4 $5)
+    inputs=("$2" "$3" "$4" "$5")
 else
-    inputs=($1 $2 $3 $4)
+    inputs=("$1" "$2" "$3" "$4")
 fi
 
 # declare vars
-wdir="rds_master_slaves"
+wdir="rds_replication"
 network="nt_$wdir"
 cdir=$(pwd)
 if [[ "$cdir" = */scripts ]]; then
@@ -30,6 +30,7 @@ echotitle="[master-slaves]"
 echo "$echotitle work dir $cdir"
 conf="$cdir/configs/standalone.conf"
 yaml="$cdir/$wdir/compose.yaml"
+script="$cdir/scripts/networks.sh"
 if [[ $stop == 1 ]]; then
     docker-compose -f $yaml down
     if [[ $force == 1 ]]; then
@@ -44,7 +45,6 @@ ipprefix="172.50.5"
 iprange="172.50.5.0/24"
 gateway="172.50.5.254"
 subnet="172.50.0.0/16"
-script="$cdir/scripts/networks.sh"
 port=11111
 ipstart=0
 slavenum=2
@@ -142,7 +142,7 @@ networks:
 EOF
 
 # write a sentinel.conf
-cat >>$cdir/$wdir/sentinel.conf <<EOF
+cat >$cdir/$wdir/sentinel.conf <<EOF
 port 6000
 sentinel monitor $wdir-$port $ipprefix.$ipstart 6379 2
 sentinel down-after-milliseconds $wdir-$port 5000

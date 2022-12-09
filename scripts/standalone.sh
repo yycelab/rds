@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 wdir="rds_standalone"
 cdir=$(pwd)
 if [[ "$cdir" = */scripts ]]; then

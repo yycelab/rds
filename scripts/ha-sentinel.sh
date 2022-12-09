@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # stop [-f]
 # [-f] {conf.file} {external-networks} {sentinelnum}
 # eg: 3 rds_master_slaves/sentinel.conf nt_rds_master_slaves nt_rds_master_slaves
@@ -13,9 +13,9 @@ if [ "$1" == "stop" ]; then
   fi
 elif [ "$1" == "-f" ]; then
   force=1
-  inputs=($2 $3 $4)
+  inputs=("$2" "$3" "$4")
 else
-  inputs=($1 $2 $3)
+  inputs=("$1" "$2" "$3")
 fi
 
 # declare vars
@@ -30,6 +30,7 @@ echotitle="[sentinels]"
 echo "$echotitle work dir $cdir"
 conf="$cdir/configs/sentinel.conf"
 yaml="$cdir/$wdir/compose.yaml"
+script="$cdir/scripts/networks.sh"
 if [[ $stop == 1 ]]; then
   docker-compose -f $yaml down
   if [[ $force == 1 ]]; then
@@ -39,22 +40,21 @@ if [[ $stop == 1 ]]; then
   fi
   exit 0
 fi
-script="$cdir/scripts/networks.sh"
 sentinelnum=3
 #初始化
 if [ -n "${inputs[0]}" ]; then
   conf=${inputs[0]}
-  if [ ! -f $conf ]; then
+  if [ ! -f "$conf" ]; then
     conf="$cdir/$conf"
   fi
-  if [ ! -f $conf ]; then
+  if [ ! -f "$conf" ]; then
     echo "$conf can't found!"
     exit 1
   fi
   if [ -n "${inputs[1]}" ]; then
     OLD_IFS="$IFS"
     IFS=","
-    external_networks=(${inputs[1]})
+    external_networks="${inputs[1]}"
     echo "external networks: $external_networks"
     IFS=$OLD_IFS
     if [[ ${inputs[2]} -gt 3 ]]; then
@@ -95,8 +95,8 @@ for ((i = 0; i < sentinelnum; i++)); do
     networks:
       $network:
 EOF
-  if [[ -n $external_networks ]]; then
-    for item in ${external_networks[@]}; do
+  if [ -n "$external_networks" ]; then
+    for item in "${external_networks[@]}"; do
       cat >>$yaml <<EOF
       $item:
 EOF
@@ -110,7 +110,7 @@ networks:
     external: true
 EOF
 if [[ -n $external_networks ]]; then
-  for item in ${external_networks[@]}; do
+  for item in "${external_networks[@]}"; do
     cat >>$yaml <<EOF
   $item:
     external: true

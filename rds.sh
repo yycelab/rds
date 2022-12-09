@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # [h|std(standalone)|c(cluster)|m(sentinel)|r(replica)|lock]
 if [ -z "$1" ] || [ "$1" == "h" ]; then
     echo ""
@@ -41,13 +41,14 @@ else
         exec="./scripts/ha-cluster.sh"
     elif [ "$1" == "m" ]; then
         if [ "$2" != "stop" ]; then
-            env_sentinel_conf="rds_master_slaves/sentinel.conf"
-            env_replcation_network="nt_rds_master_slaves"
+            env_replcation_name="rds_replication"
+            env_sentinel_conf="$env_replcation_name/sentinel.conf"
+            env_replcation_network="nt_$env_replcation_name"
             args="$args $env_sentinel_conf $env_replcation_network"
         fi
         exec="./scripts/ha-sentinel.sh"
     elif [ "$1" == "r" ]; then
-        exec="./scripts/master-slaves.sh"
+        exec="./scripts/replication.sh"
     elif [ "$1" == "lock" ]; then
         exec="./scripts/ha-redlock.sh"
     else

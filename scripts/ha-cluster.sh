@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # [-f] {replica_num} {master_num}
 wdir="rds_cluster"
 cdir=$(pwd)

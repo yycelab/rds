@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 wdir="rds_redlock"
 cdir=$(pwd)
 if [[ "$cdir" = */scripts ]]; then
