@@ -10,4 +10,5 @@ standalone.conf master节点/单机/redlock锁节点节点配置模板; slaver�
 ### scripts
 ```text
 生成不同redis使用场景的脚本
+
 ```
