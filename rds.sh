@@ -7,7 +7,7 @@ if [ -z "$1" ] || [ "$1" == "h" ]; then
     echo "     h help info."
     echo "   std create a standalone redis server"
     echo "     c create a redis's cluster (3masters,2replicas) with 9 server nodes"
-    echo "     m create a sentinel cluster (3 sentinels)"
+    echo "     m create a sentinel cluster (3 sentinels),port:6000"
     echo "     r create a replication(1master,2slaves)"
     echo "  lock create 3 redis server(standalone) for redlock"
     echo "subcommand:"
