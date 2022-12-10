@@ -33,19 +33,17 @@ fi
 params="--driver=$5"
 if [ -z "$5" ]; then
   params="--driver=bridge"
+  if [ -n "$2" ]; then
+    params="$params --subnet=$2"
+    if [ -n "$3" ]; then
+      params="$params --gateway=$3"
+      if [ -n "$4" ]; then
+        params="$params --ip-range=$4"
+      fi
+    fi
+  fi
 fi
 
-if [ -n "$2" ]; then
-  params="$params --subnet=$2"
-fi
-
-if [ -n "$3" ]; then
-  params="$params --gateway=$3"
-fi
-
-if [ -n "$4" ]; then
-  params="$params --ip-range=$4"
-fi
 echo "$echotitle docker network create $params $1"
 cmd=$(docker network create $params $1)
 if [ ${#cmd} == 64 ]; then

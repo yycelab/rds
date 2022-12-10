@@ -154,7 +154,7 @@ Cluster使用的网络:nt_rds_cluster ,对应容器rds_cluster-server*
 ]
 ```
 
-### 验证Cluster
+### 验证Cluster(HA)
 
 ```text
 1:验证数据存储没有问题
@@ -232,7 +232,7 @@ docker exec -it rds_cluster-server6 /bin/sh
 "test message"
 结论:集群模式数据写入成功
 
-2:验证集群模式下自我回复能力.master节点faildown,对应的slave节点切换为master继续服务
+2:验证集群模式下自我恢复能力.master节点faildown,对应的slave节点切换为master继续服务
 step1: 任意节点执行:(这里使用的是rds_cluster-server1)
 redis-cli -c
 127.0.0.1:6379> set testkey 'test master faildown'
