@@ -2,8 +2,8 @@
 wdir="rds_redlock"
 cdir=$(pwd)
 if [[ "$cdir" = */scripts ]]; then
-    cd ..
-    cdir=$(pwd)
+  cd ..
+  cdir=$(pwd)
 fi
 echotitle="[redlock]"
 locknum=3
@@ -15,24 +15,24 @@ network="nt_$wdir"
 script="$cdir/scripts/networks.sh"
 yaml="$cdir/$wdir/compose.yaml"
 if [ "$1" = "stop" ]; then
-    docker-compose -f $yaml down
-    if [ "$2" == "-f" ]; then
-        echo "$echotitle $($script rm $network)"
-        rm -rf $wdir
-        echo "$echotitle clean directories $wdir"
-    fi
-    exit 0
+  docker-compose -f $yaml down
+  if [ "$2" == "-f" ]; then
+    echo "$echotitle $($script rm $network)"
+    rm -rf $wdir
+    echo "$echotitle clean directories $wdir"
+  fi
+  exit 0
 fi
 if [[ $1 -gt 3 ]]; then
-    locknum=$1
+  locknum=$1
 fi
 
 if [ "$2" == "-f" ]; then
-    rm -rf $wdir
-    echo "$echotitle clean $wdir"
+  rm -rf $wdir
+  echo "$echotitle clean $wdir"
 fi
 if [ ! -d $wdir ]; then
-    mkdir $wdir
+  mkdir $wdir
 fi
 
 cat >>$yaml <<EOF
@@ -41,15 +41,18 @@ services:
 EOF
 
 for ((i = 0; i < locknum; i++)); do
-    dconf="$cdir/$wdir/lock-server$i/conf"
-    if [ ! -d $dconf ]; then
-        mkdir -p $dconf
-        echo "$echotitle ensure '$dconf' directory exists"
-    fi
-    cp -f $conf $dconf/redis.conf
-    echo "$echotitle copy redis config file"
-    expose=$(expr $expose_port + $i)
-    cat >>$yaml <<EOF
+  dconf="$cdir/$wdir/lock-server$i/conf"
+  if [ ! -d $dconf ]; then
+    mkdir -p $dconf
+    echo "$echotitle ensure '$dconf' directory exists"
+  fi
+  cp -f $conf $dconf/redis.conf
+  cat >>$dconf/redis.conf <<EOF
+appendfsync always
+EOF
+  echo "$echotitle copy redis config file"
+  expose=$(expr $expose_port + $i)
+  cat >>$yaml <<EOF
   lock_server$i:
     container_name: $wdir-s$i
     command: redis-server /usr/local/etc/redis/redis.conf

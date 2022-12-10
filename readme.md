@@ -1,3 +1,8 @@
+### 使用场景
+```text
+1. 单机redis
+2. 分布式锁(redlock),3 * 单机redis (AOF开启)
+```
 ### redis镜像
 ```text
 使用Dockerfile文件构建 myredis:7.0.3-alphine
