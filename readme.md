@@ -34,6 +34,8 @@ standalone.conf master节点/单机/redlock锁节点节点配置模板; slaver�
 ### 所有的场景容器启动完
 
 ```text
+docker ps |grep rds_
+
 CONTAINER ID   IMAGE                    COMMAND                 CREATED              STATUS              PORTS                     NAMES
 a46ed1be5d5b   myredis:7.0.3-alphine   "docker-entrypoint.s…"   47 seconds ago       Up 45 seconds       0.0.0.0:6380->6379/tcp    rds_standalone
 ffe0b09a7497   myredis:7.0.3-alphine   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:6383->6379/tcp    rds_redlock-s2
