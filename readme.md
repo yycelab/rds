@@ -1,7 +1,10 @@
 ### 使用场景
 ```text
 1. 单机redis
-2. 分布式锁(redlock),3 * 单机redis (AOF开启)
+2. 分布式锁(redlock),3 * 单机redis (AOF开启,appendfsync always)
+3. Cluster(HA) 3master(*2replica)
+4. 主从复制 1master(*2replica)
+5. Sentinel(3 node cluster)
 ```
 ### redis镜像
 ```text
