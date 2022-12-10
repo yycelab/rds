@@ -356,7 +356,7 @@ OK
 (integer) 595
 ```
 
-> 2:验证哨兵系统切换replication的slave->master,(failed master再次上线)master->slave
+> 2:验证哨兵系统failover能力:slave->master,(failed master再次上线)master->slave
 
 ```text
 step1: Sentinel状态
