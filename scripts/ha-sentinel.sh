@@ -19,14 +19,14 @@ else
 fi
 
 # declare vars
-wdir="rds_sentinels"
+wdir="rds_sentinel"
 network="nt_$wdir"
 cdir=$(pwd)
 if [[ "$cdir" = */scripts ]]; then
   cd ..
   cdir=$(pwd)
 fi
-echotitle="[sentinels]"
+echotitle="[sentinel]"
 echo "$echotitle work dir $cdir"
 conf="$cdir/configs/sentinel.conf"
 yaml="$cdir/$wdir/compose.yaml"
@@ -76,7 +76,8 @@ version: '3'
 services:
 EOF
 for ((i = 0; i < sentinelnum; i++)); do
-  nodedir="sentinel$i"
+  order=$(($i + 1))
+  nodedir="sentinel$order"
   dconf="$wdir/$nodedir/conf"
   if [ ! -d $dconf ]; then
     mkdir -p $dconf
@@ -86,7 +87,7 @@ for ((i = 0; i < sentinelnum; i++)); do
   echo "$echotitle copy redis config file"
   cat >>$yaml <<EOF
  salve_$i:
-    container_name: ${wdir}-slave$i
+    container_name: ${wdir}$order
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     image: myredis:7.0.3-alphine
     volumes:
