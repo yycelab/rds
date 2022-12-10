@@ -54,8 +54,12 @@ b51372f29464   myredis:7.0.3-alphine   "docker-entrypoint.s…"   6 hours ago   
 1e5aedf5993a   myredis:7.0.3-alphine   "docker-entrypoint.s…"   6 hours ago          Up 6 hours          0.0.0.0:16382->6379/tcp   rds_cluster-server4
 ea1829d60b32   myredis:7.0.3-alphine   "docker-entrypoint.s…"   6 hours ago          Up 5 hours          0.0.0.0:16381->6379/tcp   rds_cluster-server3
 450f0b28b61e   myredis:7.0.3-alphine   "docker-entrypoint.s…"   6 hours ago          Up 6 hours          0.0.0.0:16384->6379/tcp   rds_cluster-server6
+```
 
-Cluster使用的网络:nt_rds_cluster ,对应容器rds_cluster-server*的ip映射
+### 验证Cluster(HA)
+
+> Cluster使用的网络:nt_rds_cluster ,对应容器rds_cluster-server*的ip映射
+```text
 docker network inspect nt_rds_cluster
 "Containers": {
     "0c3e4218d6db12e861531ff20b0188ed7339d937c6b39498e0287f2bec4aab0e": {
@@ -125,10 +129,10 @@ docker network inspect nt_rds_cluster
         
 ```
 
-### 验证Cluster(HA)
 
+
+>1:验证数据存储
 ```text
-1:验证数据存储没有问题
 docker exec -it rds_cluster-server1 /bin/sh
 /data # redis-cli -c   #//注意这里使用了客户端的集群模式:-c
 127.0.0.1:6379> CLUSTER NODES
@@ -202,8 +206,10 @@ docker exec -it rds_cluster-server6 /bin/sh
 127.0.0.1:6379> get testkey
 "test message"
 结论:集群模式数据写入成功
+```
 
-2:验证集群模式下自我恢复能力.master节点faildown,对应的slave节点切换为master继续服务
+> 2:验证Cluster模式下failover能力.master故障,对应的slave节点切换为master继续服务
+```text
 step1: 任意节点执行:(这里使用的是rds_cluster-server1)
 redis-cli -c
 127.0.0.1:6379> set testkey 'test master faildown'
@@ -320,9 +326,11 @@ docker network inspect nt_rds_replication
         "IPv6Address": ""
     }
 },
-       
+```       
 
-1: 验证master-slaves集群: slave节点[172.50.5.1/2],master[172.50.5.0]
+> 1: 验证master-slaves集群: slave节点[172.50.5.1/2],master[172.50.5.0]
+
+```text
 docker exec -it rds_replication-master /bin/sh
 /data # redis-cli
 127.0.0.1:6379> INFO replication
@@ -346,10 +354,11 @@ OK
 (integer) 1
 127.0.0.1:6379> ttl testkey
 (integer) 595
+```
 
+> 2:验证哨兵系统切换replication的slave->master,(failed master再次上线)master->slave
 
-2:验证哨兵系统切换replication的slave->master,(failed master再次上线)master->slave
-
+```text
 step1: Sentinel状态
 docker exec -it rds_sentinel1 /bin/sh
 /data # redis-cli -p 6000
@@ -417,5 +426,4 @@ repl_backlog_active:1
 repl_backlog_size:1048576
 repl_backlog_first_byte_offset:1
 repl_backlog_histlen:226170
-
 ```
