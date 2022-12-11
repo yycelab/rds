@@ -1,6 +1,6 @@
 ### 使用场景
 ```text
-1. 单机redis
+1. 单机redis(支持BoolFilter模块(rebloom),漏斗限流模块(redis cell))
 2. 分布式锁(redlock),3 * 单机redis (AOF开启,appendfsync always)
 3. Cluster(HA) 3master(*2replica)
 4. 主从复制 1master(*2replica)
