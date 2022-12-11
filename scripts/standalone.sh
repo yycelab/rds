@@ -31,6 +31,11 @@ if [ ! -d $dconf ]; then
   echo "$echotitle ensure '$dconf' directory exists"
 fi
 cp -f $conf $dconf/redis.conf
+cp -f $cdir/libs/*.so $dconf/
+cat>>$dconf/redis.conf<<EOF
+loadmodule /usr/local/etc/redis/rebloom.so
+loadmodule /usr/local/etc/redis/libredis_cell.so
+EOF
 echo "$echotitle copy redis config file"
 
 cat >$yaml <<EOF
@@ -39,7 +44,7 @@ services:
   standalone:
     container_name: ${wdir}
     command: redis-server /usr/local/etc/redis/redis.conf
-    image: myredis:7.0.3-alphine
+    image: myredis:7.0.3
     networks:
       $network:
     ports:
