@@ -442,3 +442,13 @@ repl_backlog_histlen:226170
 [Redis Rehash机制的探索和实践](https://mp.weixin.qq.com/s/ufoLJiXE0wU4Bc7ZbE9cDQ "美团针对Redis Rehash机制的探索和实践")
 
 [Redis 实现分布式锁(深层次思考)](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html "How to do distributed locking")
+
+[CRC64 的神秘往事](https://xie.infoq.cn/article/dc032d3adcc5892fdaa9322b5 "Redis 之父关于 CRC64 的神秘往事")
+
+
+### redis学习一些好的书籍
+
+```text
+[Redis设计与实现]  重原理,数据结构和算法
+[Redis深度历险]    重要知识点出,redis的各种姿势(书中存在不是很正确的描述,读者自行斟酌)
+```
