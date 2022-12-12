@@ -435,3 +435,10 @@ repl_backlog_size:1048576
 repl_backlog_first_byte_offset:1
 repl_backlog_histlen:226170
 ```
+
+### redis相关一些很好的文章
+
+
+[Redis Rehash机制的探索和实践](https://mp.weixin.qq.com/s/ufoLJiXE0wU4Bc7ZbE9cDQ "美团针对Redis Rehash机制的探索和实践")
+
+[Redis 实现分布式锁(深层次思考)](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html "How to do distributed locking")
